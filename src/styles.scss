@@ -1,99 +1,273 @@
+/* Переменные для цветов */
+$color-bg: #1c1c1c;
+$color-text: #e0e0e0;
+$color-accent: #b3b3b3;
+$color-header: #ffffff;
+$color-subtext: #d0d0d0;
+$color-section-bg: #2f2f2f;
+$color-button-bg: #4a4a4a;
+
+/* Общие стили */
 body {
-    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: $color-bg;
+    color: $color-text;
+}
+
+a {
+    text-decoration: none;
+    color: $color-accent;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $color-header;
+    }
+}
+
+h1, h2, h3 {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-  }
-  
-  .header {
+    color: $color-header;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: $color-subtext;
+}
+
+/* Миксин для секций */
+@mixin section-style($bg-color, $padding: 20px) {
+    background-color: $bg-color;
+    padding: $padding;
+}
+
+/* Миксин для общих визуальных блоков */
+@mixin section-visual($height: 200px) {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    height: $height;
+}
+
+/* Сетка */
+.flex-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #000;
-    color: #fff;
-  
-    .navigation a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
+    gap: 20px;
+}
+
+.grid-container {
+    display: grid;
+    gap: 20px;
+}
+
+/* Секция main-banner */
+.main-banner {
+    @include section-style(#2a2a2a);
+
+    &__header {
+        @extend .flex-container;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        &__logo img {
+            max-height: 60px;
+        }
+
+        &__nav a {
+            margin: 0 10px;
+            font-weight: bold;
+            color: #c0c0c0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        
+            &:hover {
+                color: #ffffff;
+            }
+        }
     }
-  }
-  
-  .hero {
-    position: relative;
+
+    &__body {
+        text-align: center;
+
+        &__title h1 {
+            font-size: 36px;
+            color: $color-header;
+        }
+
+        &__title h2 {
+            font-size: 24px;
+        }
+
+        &__cta a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;;
+            color: $color-header;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $color-header;
+                color: $color-button-bg;
+            }
+        }
+    }
+}
+
+.button-join-now {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007BFF;
+    color: #ffffff;
+    border-radius: 8px;
+    font-weight: bold;
     text-align: center;
-    color: #fff;
-  
-    .hero-image {
-      width: 100%;
-      height: auto;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        background-color: #ffffff;
+        color: #4a4a4a;
     }
-  
-    .hero-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+}
+
+/* Секция company-report */
+.company-report {
+    @include section-style($color-section-bg);
+    @extend .flex-container;
+
+    &__visual {
+        background-image: url('https://media.tenor.com/L-oXoWujdPAAAAAM/dns-alien.gif');
+        @include section-visual();
     }
-  
-    .cta-button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 16px;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-  
-      &:hover {
-        background-color: #0056b3;
-      }
+
+    &__text h3 {
+        margin-bottom: 10px;
     }
-  }
-  
-  .section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #fff;
-    margin-bottom: 20px;
-  
-    &:nth-of-type(odd) {
-      flex-direction: row-reverse;
+}
+
+/* Секция tagline */
+.tagline {
+    text-align: center;
+    @include section-style(#3c3c3c, 10px);
+    font-size: 18px;
+}
+
+/* Секция incident-log */
+.incident-log {
+    @include section-style($color-section-bg);
+    @extend .flex-container;
+
+    &__visual {
+        background-image: url('https://mozaica.ru/upload/resize_cache/iblock/ebc/767_500_1/ebcb0f12f3a4574c1eeaeca8c140457c.jpg');
+        @include section-visual();
     }
-  
-    .section-text {
-      max-width: 60%;
-      text-align: left;
-  
-      h2 {
-        color: #1a73e8;
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-      }
-  
-      p {
-        font-size: 18px;
-        line-height: 1.6;
-      }
+}
+
+/* Секция research-note */
+.research-note {
+    @include section-style(#3a3a3a);
+    text-align: center;
+}
+
+/* Секция new-era */
+.new-era {
+    @include section-style($color-section-bg);
+    @extend .flex-container;
+
+    &__visual {
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPzkHVS9f86xctVWsvejHMDNal2RHm3sYt4Q&s');
+        @include section-visual();
     }
-  
-    .section-image {
-      max-width: 35%;
-      display: flex;
-      justify-content: center;
-  
-      .image {
-        max-width: 300px;
-        border-radius: 10px;
-      }
+}
+
+/* Секция milestone */
+.milestone {
+    text-align: center;
+    @include section-style(#3c3c3c, 10px);
+    font-size: 18px;
+}
+
+/* Секция xenomorph-revival */
+.xenomorph-revival {
+    @include section-style($color-section-bg);
+    @extend .flex-container;
+}
+
+/* Секция practical-applications */
+.practical-applications {
+    @include section-style(#3a3a3a);
+    @extend .grid-container;
+    grid-template-columns: 1fr 1fr;
+
+    &__visual {
+        grid-column: span 2;
+        background-image: url('https://cdn.kanobu.ru/articles/pics/tmp/images/2022/12/7/a3baa506-3983-491b-a26c-b201f8dab54c.jpg');
+        @include section-visual();
     }
-  }
-  
-  .image {
-    max-width: 100%;
-    border-radius: 10px;
-  }
+}
+
+/* Секция support-call */
+.support-call {
+    @include section-style($color-section-bg);
+    @extend .grid-container;
+    grid-template-columns: 1fr 1fr;
+
+
+    &__visual {
+        grid-column: span 2;
+    }
+}
+
+/* Секция final-tagline */
+.final-tagline {
+    text-align: center;
+    @include section-style(#3c3c3c);
+
+    h1 {
+        font-size: 36px;
+    }
+
+    h2, h3 {
+        font-size: 24px;
+    }
+}
+
+/* Секция cta */
+.cta {
+    text-align: center;
+    @include section-style($color-button-bg);
+
+    &__button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: $color-header;
+        color: $color-button-bg;
+        font-weight: bold;
+        border-radius: 8px;
+
+        &:hover {
+            background-color: $color-section-bg;
+            color: $color-header;
+        }
+    }
+}
+
+/* Секция closing-logo */
+.closing-logo {
+    text-align: center;
+    @include section-style(#2a2a2a);
+}
+
+/* Секция footer */
+.footer {
+    text-align: center;
+    @include section-style(#2a2a2a, 10px);
+    font-size: 14px;
+}
